@@ -1,0 +1,32 @@
+{
+    "info": {
+        "name": "ZepplinModHelper",
+        "authors": [{
+                "name": "Obli",
+                "discord_id": "96615490914357248",
+                "github_username": "Obliie",
+                "twitter_username": "Obliie"
+            }],
+        "version": "0.1.0",
+        "description": "A BetterDiscord plugin to help accelerate moderator actions with the Zepplin bot.",
+        "github": "https://github.com/Obliie/ZepplinModHelper/tree/master/Releases/ZepplinModHelper",
+        "github_raw": "https://raw.githubusercontent.com/Obliie/ZepplinModHelper/master/Releases/ZepplinModHelper/ZepplinModHelper.plugin.js"
+    },
+    "changelog": [
+        { "title": "Initial Release!", "items": [ "Hopefully this works! If there are any issues let me know" ] }
+    ],
+    "main": "index.js",
+    "defaultConfig": [
+        {
+            "type": "category",
+            "id": "config",
+            "name": "Config",
+            "collapsible": false,
+            "shown": true,
+            "settings": [
+                {"type": "textbox", "id": "bot_user_id", "name": "Bot User ID", "note": "The user ID for the Zepplin bot", "value": ""},
+                {"type": "textbox", "id": "bot_channel_id", "name": "Bot Channel ID", "note": "The channel ID to run commands in.", "value": ""}
+            ]
+        }
+    ]
+}

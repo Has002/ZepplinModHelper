@@ -1,0 +1,138 @@
+#popout-moderation-wrapper .header {
+    background-color: var(--primary-630);
+    border-bottom: 3px solid var(--primary-700);
+    padding: 12px 20px;
+    z-index: 1;
+    color: var(--white-500);
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 19px;
+}
+
+/* Upper Section */
+
+#popout-moderation-wrapper .popout-upper {
+    height: 500px;
+    width: auto;
+    flex-direction: row;
+    overflow: hidden;
+    display: flex;
+    flex: 1;
+    contain: layout;
+    position: relative;
+}
+
+.action-side, .chat-side {
+    flex-direction: column;
+    padding-left: 6px;
+}
+
+#popout-moderation-wrapper .scroller {
+    contain: layout;
+    flex: 1;
+    flex-direction: column-reverse;
+    min-height: 1px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    flex: 1 1 auto;
+}
+
+/* Actions Side */
+
+#popout-moderation-wrapper .action-side {
+    width: auto;
+    min-width: 150px;
+    background: var(--primary-600);
+    flex: 0 0 auto;
+    overflow: hidden;
+    display: flex;
+    min-height: 1px;
+    position: relative;
+}
+
+#popout-moderation-wrapper .action-radio {
+    position: fixed;
+    opacity: 0;
+    pointer-events: none;
+}
+
+#popout-moderation-wrapper .action-button {
+    display: flex;
+    border-radius: 2px;
+    padding: 6px;
+    margin: 5px 6px 5px 0px;
+    cursor: pointer;
+    color: var(--primary-200);
+}
+
+#popout-moderation-wrapper .action-button:hover:not(.selected-button) {
+    background-color: var(--primary-630);
+    color: var(--primary-100);
+}
+
+#popout-moderation-wrapper .selected-button {
+    background-color: var(--primary-700);
+    color: var(--white-500);
+}
+
+/* Case Side */
+
+#popout-moderation-wrapper .chat-side {
+    width: 350px;
+    background-color: var(--primary-560);
+    flex: 0 0 auto;
+    display: flex;
+    min-height: 1px;
+    position: relative;
+    padding-left: 10px;
+}
+
+#popout-moderation-wrapper .user-info-container {
+    display: table;
+    flex-direction: row;
+    color: var(--white-500);
+    padding: 4px 10px 4px 4px;
+}
+
+#popout-moderation-wrapper .user-info-text {
+    display: table-cell;
+    vertical-align: middle;
+    color: var(--white-500);
+}
+
+#popout-moderation-wrapper .button {
+    width: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    border-radius: 3px;
+    font-size: 14px;
+    padding: 2px 16px;
+    float: right;
+}
+
+#popout-moderation-wrapper .scroller-title {
+    font-weight: 400;
+    color: var(--white-500);
+    padding: 8px 0 4px 4px;
+    margin-right: 8px;
+    border-bottom: 1px solid var(--primary-660);
+}
+
+#popout-moderation-wrapper .case {
+    border-bottom: 1px solid var(--primary-600);
+    border-width: 3px;
+    padding: 5px 0px;
+}
+
+/* Lower Section */
+
+#popout-moderation-wrapper .popout-lower {
+    display: flex;
+    flex-direction: row;
+    border-top: 3px solid var(--primary-700);
+    background: var(--primary-630);
+}
+
+#popout-moderation-wrapper .reason-input {
+    background-color: var(--primary-560);
+}
