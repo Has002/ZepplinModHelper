@@ -118,12 +118,6 @@
     border-bottom: 1px solid var(--primary-660);
 }
 
-#popout-moderation-wrapper .case {
-    border-bottom: 1px solid var(--primary-600);
-    border-width: 3px;
-    padding: 5px 0px;
-}
-
 /* Lower Section */
 
 #popout-moderation-wrapper .popout-lower {

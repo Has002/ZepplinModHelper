@@ -110,10 +110,11 @@ if (!global.ZeresPluginLibrary) {
  
 module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
      const plugin = (Plugin, Api) => {
-    const {DOM, ContextMenu, Patcher, Webpack, UI, Utils} = window.BdApi;
+    const {DOM, ContextMenu, Patcher, Webpack, UI, Utils, React, ReactDOM} = window.BdApi;
     const {DiscordModules, WebpackModules, DiscordClasses, DiscordSelectors, DOMTools, Utilities, Popouts} = Api;
 
     const PopoutClasses = WebpackModules.getByProps("container", "medium");
+    const MarkdownModule = WebpackModules.getByProps("parse", "defaultRules");
 
     return class ZepplinModHelper extends Plugin {
         constructor() {
@@ -239,12 +240,6 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
     border-bottom: 1px solid var(--primary-660);
 }
 
-#popout-moderation-wrapper .case {
-    border-bottom: 1px solid var(--primary-600);
-    border-width: 3px;
-    padding: 5px 0px;
-}
-
 /* Lower Section */
 
 #popout-moderation-wrapper .popout-lower {
@@ -282,7 +277,7 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
                     </div>
                     <span class="scroller-title">Case Information</span>
                     <div class="case-scroller scroller auto-2TJ1RH scrollerBase-1Pkza4">
-
+                        <div class="cases"></div>
                     </div>
                 </div>
             </div>
@@ -402,14 +397,26 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
 
             // Populate case information in popup.
             if (message.embeds !== undefined && message.embeds.length > 0) {
-                for (const moderationCase of message.embeds[0].fields) {
-                    const caseElement = DOMTools.parseHTML(Utilities.formatString(this.caseHTML, {case: moderationCase.value}));
+                const cases = message.embeds
+                    .flatMap((embed) => embed.fields)
+                    .map((moderationCase, index) => {
+                        const parsedMarkdown = MarkdownModule.parse(moderationCase.value, MarkdownModule.defaultRules, { inline:  false});
+                        const caseElement = React.createElement("span", {
+                            className: "case markup-eYLPri"
+                        }, parsedMarkdown);
 
-                    this.activePopout.querySelector(".case-scroller").append(caseElement);
-                }
+                        return caseElement;
+                    });
+
+                const embedTitle = React.createElement("span", {
+                    className: "case markup-eYLPri"
+                }, message.embeds[0].author.name);
+                const casesToRender = [embedTitle].concat(cases);
+
+                ReactDOM.render(casesToRender, this.activePopout.querySelector(".cases"));
             } else {
                 const caseElement = DOMTools.parseHTML(Utilities.formatString(this.caseHTML, {case: "No Cases"}));
-                this.activePopout.querySelector(".case-scroller").append(caseElement);
+                this.activePopout.querySelector(".cases").append(caseElement);
             }
 
             this.casesPopulated = true;
